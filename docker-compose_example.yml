@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+    your_service:
+        environment:
+           - Sample=1500
+           # IMPORTANT DOCKER_SECRET needs to be the prefix, secret_db_adr is the name of the secret
+           - DB_ADR='{{"{{DOCKER_SECRET:secret_db_adr}}"}}'
+           - DB_USER='{{"{{DOCKER_SECRET:secret_db_user}}"}}'
+           - DB_PASS='{{"{{DOCKER_SECRET:secret_db_pass}}"}}'
+        image: your_image
+        command: /bin/sh -c 'source /secrets2env.sh && <entrypoint command>
